@@ -12,4 +12,31 @@ for(int i=arr.length-1;i>0;i--){
 }
 
 2.选择排序
+循环对比数组中的元素，找出最小元素，记录其下标，然后和数组第一个元素交换位置；此时第一个元素变成最小，然后剩下的元素重复此步骤，找出第二小的元素并交换其位置到第二位，直到倒数第二个元素位置也确定，最后的即为最大。
 
+for(int i=0;i<arr.length-1;i++){
+  int minIndex = i;
+  for(int j=i+1;j<arr.length;j++){
+    if(arr[j]<arr[minIndex]){
+      minIndex = j;
+    }
+  }
+  if(minIndex != i){
+    int temp = arr[i];
+    arr[i] = arr[minIndex];
+    arr[minIndex] = temp;
+  }
+}
+
+3.插入排序
+设第一个元素a为已排序的最后一个元素，下一个元素b与其比较，若元素a大，则元素a位置向后挪一位，并元素b将继续朝前比较；直到找到小于或等于元素b的位置，此时将b放置在该位置的下一个位置；重复上述步骤直到最后一个元素。
+
+for(int i<1;i<arr.length;i++){
+  int temp = arr[i];
+  int j = i-1;
+  while(j>=0 && arr[j]>temp){
+    arr[j+1] = arr[j];
+    j--;
+  }
+  arr[j+1] = temp;
+}
