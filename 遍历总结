@@ -38,3 +38,69 @@ public void pre(TreeNode biTree){
   }
 }
   
+2.中序遍历
+遍历顺序：左-根-右
+
+//递归遍历
+public void mid(TreeNode biTree){
+  TreeNode leftTree = biTree.left;
+  if(leftTree != null){
+    mid(leftTree);
+  }
+  System.out.println(biTree.value);
+  TreeNode rightTree = biTree.right;
+  if(rightTree != null){
+    mid(rightTree);
+  }
+}
+//非递归遍历
+public void mid(TreeNode biTree){
+  Stack<TreeNode> stack = new Stack<TreeNode>();
+  while(biTree != null || !stack.isEmpty()){
+    while(biTree != null){
+      stack.push(biTree);
+      biTree = biTree.left;
+    }
+    if(!stack.isEmpty()){
+      biTree = stack.pop();
+      System.out.println(biTree.value);
+      biTree = biTree.right;
+    }
+  }
+}
+
+3.后序遍历
+遍历顺序：左-右-根
+
+//递归遍历
+public void pos(TreeNode biTree){
+  if(biTree == null){
+    return ;
+  }
+  TreeNode leftTree = biTree.left;
+  pos(leftTree);
+  TreeNode rightTree = biTree.right;
+  pos(rightTree);
+  System.out.println(biTree.value);
+}
+//非递归遍历
+public void pos(TreeNode biTree){
+  Stack<TreeNode> stack = new Stack<TreeNode>();
+  TreeNode current;
+  TreeNode last;
+  stack.push(biTree);
+  while(!stack.isEmpty()){
+    current = stack.pop();
+    if((current.left == null && current.right == null) || (last!=null && (last==current.left || last==current.right))){
+      System.out.println(current.value);
+      last = current;
+    }else{
+      if(current.right != null){
+        stack.push(current.right);
+      }
+      if(current.left != null){
+        stack.push(current.left);
+      }
+    }
+  }
+}
