@@ -1,0 +1,40 @@
+1.前序遍历（先序遍历）
+二叉树遍历的一种，遍历顺序：根-左-右
+
+//节点定义
+public class TreeNode{
+  int value；
+  TreeNode left；
+  TreeNode right；
+  public TreeNode(int v){
+    value = v;
+  }
+}
+//递归遍历
+public void pre(TreeNode biTree){
+  System.out.println(biTree.value);
+  TreeNode leftTree = biTree.left;
+  if(leftTree != null){
+    pre(leftTree);
+  }
+  TreeNode rightTree = biTree.right;
+  if(rightTree != null){
+    pre(rightTree);
+  }
+}
+//非递归遍历
+public void pre(TreeNode biTree){
+  Stack<TreeNode> stack = new Stack<TreeNode>();
+  while(biTree != null || !stack.isEmpty()){
+    while(biTree != null){
+      System.out.println(biTree.value);
+      stack.push(biTree);
+      biTree = biTree.left;
+    }
+    if(!stack.isEmpty()){
+      biTree = stack.pop();
+      biTree = biTree.right;
+    }
+  }
+}
+  
