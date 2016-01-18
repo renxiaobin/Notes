@@ -90,8 +90,9 @@ public void pos(TreeNode biTree){
   TreeNode last;
   stack.push(biTree);
   while(!stack.isEmpty()){
-    current = stack.pop();
+    current = stack.peek();
     if((current.left == null && current.right == null) || (last!=null && (last==current.left || last==current.right))){
+      stack.pop();
       System.out.println(current.value);
       last = current;
     }else{
