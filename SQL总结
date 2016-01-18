@@ -1,0 +1,14 @@
+SQL分类：
+DDL（Data Definition Language）——数据定义语言：CREAT,ALERT,DROP,DECLARE
+DML（Data Manipulation Language）——数据操作语言：SELECT,DELETE,UPDATE,INSERT
+DCL（Data Control Language）——数据控制语言：GRANT,REVOKE,COMMIT,ROLLBACK
+
+创建数据库：CREATE DATABASE db-name;
+删除数据库：DROP DATABASE db-name;
+创建表：CREATE TABLE table-name (col1 type1 [not null] [primary key],...);
+删除表：DROP TABLE table-name;
+
+外连接：
+left outer join左外连接（左连接）：结果集不仅包括连接表的匹配行，也包括左连接表的所有行；
+right outer join右外连接（右连接）：结果集不仅包括连接表的匹配行，也包括右连接表的所有行；
+full outer join全外连接：结果集不仅包括连接表的匹配行，也包括两个连接表的所有行；
