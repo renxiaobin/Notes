@@ -1,7 +1,11 @@
 1.通过Java访问URL地址获取资源
-
 URL url = new URL("http://www.***.com/");
 InputStream is = url.openConnection().getInputStream();
 上述通过URL访问一个地址时，如果遇到“java.io.IOException: Server returned HTTP response code: 403 for URL. But it's ok when open the url using browser.”这样的错误，可能是指服务器检查了User-Agent（用户代理，一般是浏览器）的HTTP Header异常，此时需要设置一下：
 URLConnection conn = url.openConnection();
 conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+2.加载类的方法
+通过new一个新的类对象，这是静态加载类的方式，如果找不到该类，会导致编译不通过；
+通过Class.forName("className")方法加载类的方式，是动态加载类的方式，运行时才会去查找该类是否存在。
+
