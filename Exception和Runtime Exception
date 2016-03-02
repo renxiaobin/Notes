@@ -1,5 +1,27 @@
 Runtime Exception： 
-在定义方法时不需要声明会抛出runtime exception；在调用这个方法时不需要捕获这个runtime exception；runtime exception是从java.lang.RuntimeException或java.lang.Error类衍生出来的，例如：NullpointException，IndexOutOfBoundsException就属于runtime exception。
+在定义方法时不需要声明会抛出runtime exception；
+在调用这个方法时不需要捕获这个runtime exception；
+runtime exception是从java.lang.RuntimeException或java.lang.Error类衍生出来的，主要有以下几种：
+·     ArithmeticException ： 一个非法算术运算产生的异常。
+·     ArrayStoreException ： 存入数组的内容数据类型不一致所产生的异常。
+·     ArrayIndexOutOfBoundsException ： 数组索引超出范围所产生的异常。
+·     ClassCastException ： 类对象强迫转换造成不当类对象所产生的异常。
+·     IllegalArgumentException ： 程序调用时，返回错误自变量的数据类型。
+·     IllegalThreadStateException ： 线程在不合理状态下运行所产生的异常。
+·     NumberFormatException ： 字符串转换为数值所产生的异常。
+·     IllegalMonitorStateException ： 线程等候或通知对象时所产生的异常。
+·     IndexOutOfBoundsException ： 索引超出范围所产生的异常。
+·     NegativeException ： 数组建立负值索引所产生的异常。
+·     NullPointerException ： 对象引用参考值为 null所产生的异常。
+·     SecurityException ： 违反安全所产生的异常。
 
 Exception:
-定义方法时必须声明所有可能会抛出的exception；在调用这个方法时，必须捕获它的checked exception，不然就得把它的exception传递下去；exception是从java.lang.Exception类衍生出来的，例如：IOException，SQLException就属于Exception。
+定义方法时必须声明所有可能会抛出的exception；
+在调用这个方法时，必须捕获它的checked exception，不然就得把它的exception传递下去；
+exception是从java.lang.Exception类衍生出来的，主要包括以下几种：
+·     ClassNotFoundException ： 找不到类或接口所产生的异常。
+·     CloneNotSupportedException ： 使用对象的 clone( )方法但无法执行 Cloneable所产生的异常。
+·     IllegalAccessException ： 类定义不明确所产生的异常。
+·     InstantiationException ： 使用 newInstance( )方法试图建立一个类 instance时所产生的异常。
+·     InterruptedException ： 目前线程等待执行，另一线程中断目前线程所产生的异常。
+还有IOException，SQLException就属于Exception。
