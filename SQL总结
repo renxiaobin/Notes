@@ -45,3 +45,19 @@ full outer join全外连接：结果集不仅包括连接表的匹配行，也�
 
 外键：
 如果关系模式R1中的某属性集不是R1的主键，而是另一个关系R2的主键则该属性集是关系模式R1的外键，通常在数据库设计中缩写为FK；外键表示了两个关系之间的相关联系，以另一个关系的外键作主关键字的表被称为主表，具有此外键的表被称为主表的从表。
+创建表时建立外键：
+create table Student
+(
+StudentNo int PRIMARY KEY IDENTITY(1,1), --加主键约束,还有标识列属性（两者构成实体完整性）
+StudentName nvarchar(15) not null, --加非空约束,不加"not null" 默认为：可以为空
+
+StudentSchool text(20) FOREIGN KEY REFERENCES SchoolTable(SchoolName), --加外键约束,格式:FOREIGN KEY REFERENCES 关联的表名(字段名)
+
+StudentAge int DEFAULT ((0)), --加默认值约束
+StudentSex nvarchar(2) CHECK(StudentSex=N'男' or StudentSex=N'女') --加检查约束,格式:check (条件表达式)
+)
+修改表时建立外键：
+alter table 表A add constraint FK_B foreign key (ticket_no) references 表B(ticket_no)
+                                                表A的字段名
+
+ 
