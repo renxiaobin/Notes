@@ -1,0 +1,9 @@
+1.接口相当于KFC的“招牌”，当你看到这个“招牌”时，你就知道里面有卖你想要的炸鸡（实现你需要的功能），如果没有接口，你需要去询问是否有你想要的炸鸡卖；
+2.团队工作的时候，你需要一个别人负责的功能，但是还没有被实现，这时候可以定义一个接口，你可以继续做你的工作，而不必去等待；
+3.调用端和实现端做一个规范，按照规范做正确的输入输出，双方对各自的业务都不要了解；
+4.接口和实现相分离，例如：
+DatabaseDao{  insert(); 增  delete(); 刪  update(); 改  query() ; 查}
+然後你突然發現你根據需要,程序要鏈接兩個數據庫 
+一個orcale, 一個 sql server你就寫了 兩個Dao的實現類orcaleImpl, SQLServerImpl，
+OrcaleImpl implement DatabaseDao(){  insert(); 增orcale  delete(); 刪orcale  update(); 改orcale  query() ; 查orcale}
+SQLServerImpl implement DatabaseDao(){  insert(); 增SQL Server  delete(); 刪SQL Server  update(); 改SQL Server  query() ; 查SQL Server}，这时候调用的地方只要根据需要DatabaseDao dao = 相应的实现类，不需要修改任何其他代码，而如果不用接口，需要更改DatabaseDao为OrcaleImpl和SQLServerImpl这个的地方会很多。
