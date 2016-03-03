@@ -1,0 +1,1 @@
+servlet是在服务器端执行的java程序，只不过它有专门的一套规则（就是我们平常所说的api）；而jsp说得简单点就是用另一套更简单的规则写的servlet程序，它可以写java代码，还可以写html代码，JavaScript，css等等……，但是到服务器端jsp首先会被转成servlet程序然后就按照servlet的执行顺序执行了。
