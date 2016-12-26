@@ -1,4 +1,5 @@
-1.Java8允许给接口添加一个非抽象的方法（有具体实现），只需要使用 default关键字即可，这个特征又叫做扩展方法，该方法当然也可以重写覆盖其实现
+1.接口的default关键字
+Java8允许给接口添加一个非抽象的方法（有具体实现），只需要使用 default关键字即可，这个特征又叫做扩展方法，该方法当然也可以重写覆盖其实现
 interface Formula {
     double calculate(int a);
     default double sqrt(int a) {
@@ -16,4 +17,5 @@ formula.calculate(100);     // 100.0
 formula.sqrt(16);           // 4.0
 
 
-2.
+2.Lambda表达式
+使用表达式可以使得代码更加简洁
