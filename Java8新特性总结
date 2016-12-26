@@ -36,4 +36,21 @@ Java编译器可以自动推导出参数类型，所以可以不用再写一次�
 Collections.sort(names, (a, b) -> b.compareTo(a));
 
 3.函数式接口
-给Interface添加 @FunctionalInterface 注解，然后可以使用lambda表达式当作任意只包含一个抽象方法的接口类型
+仅仅只包含一个抽象方法的接口，每一个该类型的lambda表达式都会被匹配到这个抽象方法（因为上述的 default 方法不算抽象方法，所以也可以给函数式接口添加默认方法）给Interface添加 @FunctionalInterface 注解，然后通过lambda表达式当作任意只包含一个抽象方法的接口类型，此时有有注解的接口如果有多个抽象方法会报错（其实没有注解也可以正确运行，因为Java8之前就有将lambda表达式映射到一个单方法的接口上的实现了）
+@FunctionalInterface
+interface Converter<F, T> {
+    T convert(F from);
+}
+Converter<String, Integer> converter = (from) -> Integer.valueOf(from);
+Integer converted = converter.convert("123");
+System.out.println(converted);    // 123
+
+4.方法与构造函数引用
+Java8允许使用 :: 关键字来传递方法或者构造函数的引用，如上面的代码可以改成
+Converter<String, Integer> converter = Integer::valueOf;
+Integer converted = converter.convert("123");
+System.out.println(converted);   // 123
+上面的代码展示了如何引用一个静态方法，当然也可以引用一个对象的方法
+Converter<String, Integer> converter = something::startsWith;
+String converted = converter.convert("Java");
+System.out.println(converted);    // "J"
