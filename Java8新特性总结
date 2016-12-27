@@ -72,4 +72,58 @@ PersonFactory<Person> personFactory = Person::new;
 Person person = personFactory.create("Peter", "Parker");
 只需要使用 Person::new 来获取Person类构造函数的引用，Java编译器会自动根据PersonFactory.create方法的签名来选择合适的构造函数
 
+5.Lambda 作用域
+在lambda表达式中访问外层作用域和老版本的匿名对象中的方式很相似,可以直接访问标记了final的外层局部变量，或者实例的字段以及静态变量。
 
+6.访问局部变量
+可以直接在lambda表达式中访问外层的局部变量
+final int num = 1;
+Converter<Integer, String> stringConverter = (from) -> String.valueOf(from + num);
+stringConverter.convert(2);     // 3
+但是和匿名对象不同的是，这里的变量num可以不用声明为final
+int num = 1;
+Converter<Integer, String> stringConverter = (from) -> String.valueOf(from + num);
+stringConverter.convert(2);     // 3
+不过这里的num必须不可被后面的代码修改（即隐性的具有final的语义），不然就无法编译
+int num = 1;
+Converter<Integer, String> stringConverter = (from) -> String.valueOf(from + num);
+num++;
+
+7.访问对象字段与静态变量
+和局部变量不同的是，lambda内部对于对象实例的字段以及静态变量是即可读又可写，该行为和匿名对象是一致的
+class LambdaTest {
+    static int outerStaticNum;
+    int outerNum;
+    void testScopes() {
+        Converter<Integer, String> stringConverter1 = (from) -> {
+            outerNum = 23;      //ok
+            return String.valueOf(from);
+        };
+        Converter<Integer, String> stringConverter2 = (from) -> {
+            outerStaticNum = 72;        //ok
+            return String.valueOf(from);
+        };
+    }
+}
+
+8.访问接口的默认方法
+Lambda表达式中是无法访问到接口的default方法的，不然无法通过编译
+Formula formula = (a) -> sqrt( a * 100);
+JDK 1.8 API包含了很多内建的函数式接口，在旧版本的Java中常用到的比如Comparator或者Runnable接口，这些接口都增加了@FunctionalInterface注解以便能用在lambda上。
+Java 8 API同样还提供了很多全新的函数式接口来让工作更加方便，有一些接口是来自Google Guava库里的，即便你对这些很熟悉了，还是有必要看看这些是如何扩展到lambda上使用的
+
+9.Date API
+Java 8 在包java.time下包含了一组全新的时间日期API。新的日期API和开源的Joda-Time库差不多，但又不完全一样
+
+10.Annotation 注解
+在Java 8中支持多重注解了，现在把同一个类型的注解使用多次，只需要给该注解标注一下@Repeatable即可
+@interface Hints {
+    Hint[] value();
+}
+@Repeatable(Hints.class)
+@interface Hint {
+    String value();
+}
+@Hint("hint1")
+@Hint("hint2")
+class Person {}
