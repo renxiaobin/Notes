@@ -1,0 +1,27 @@
+1. -client，-server 
+这两个参数用于设置虚拟机使用何种运行模式，client 模式启动比较快，但运行时性能和
+内存管理效率不如 server 模式，通常用于客户端应用程序。相反，server 模式启动比 client
+慢，但可获得更高的运行性能。 
+ 
+在 windows上，缺省的虚拟机类型为 client 模式，如果要使用 server模式，就需要在启动
+虚拟机时加-server 参数，以获得更高性能，对服务器端应用，推荐采用 server 模式，尤
+其是多个 CPU 的系统。在 Linux，Solaris 上缺省采用 server模式。 
+
+2.-classpath 
+告知虚拟机搜索目录名、jar 文档名、zip 文档名，之间用分号;分隔。 
+ 
+例如当你自己开发了公共类并包装成一个 common.jar 包，在使用 common.jar 中的类时，就
+需要用-classpath common.jar 告诉虚拟机从 common.jar 中查找该类，否则虚拟机就会抛
+出 java.lang.NoClassDefFoundError异常，表明未找到类定义。 
+ 
+在运行时可用 System.getProperty(“java.class.path”)得到虚拟机查找类的路径。 
+ 
+ 
+使用-classpath 后虚拟机将不再使用 CLASSPATH 中的类搜索路径，如果-classpath 和
+CLASSPATH 都没有设置，则虚拟机使用当前路径(.)作为类搜索路径。 
+ 
+推荐使用-classpath 来定义虚拟机要搜索的类路径，而不要使用环境变量 CLASSPATH 的搜
+索路径，以减少多个项目同时使用 CLASSPATH 时存在的潜在冲突。例如应用 1 要使用
+a1.0.jar 中的类 G，应用 2 要使用 a2.0.jar 中的类 G,a2.0.jar 是 a1.0.jar 的升级包，当
+a1.0.jar，a2.0.jar 都在 CLASSPATH 中，虚拟机搜索到第一个包中的类 G 时就停止搜索，
+如果应用1应用2的虚拟机都从CLASSPATH中搜索，就会有一个应用得不到正确版本的类G。
